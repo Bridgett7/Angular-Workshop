@@ -5,11 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { SuggestionsRoutingModule } from './suggestions-routing.module';
 import { SuggestionsComponent } from './suggestions.component';
 import { ListSuggestionComponent } from './list-suggestion/list-suggestion.component';
+import { SuggestionDetailsComponent } from './suggestion-details/suggestion-details.component';
 
 @NgModule({
   declarations: [
     SuggestionsComponent,
-    ListSuggestionComponent
+    ListSuggestionComponent,
+    SuggestionDetailsComponent
   ],
   imports: [
     CommonModule,
