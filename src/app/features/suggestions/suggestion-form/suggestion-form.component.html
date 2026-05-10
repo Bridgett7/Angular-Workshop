@@ -1,1 +1,55 @@
-<p>suggestion-form works!</p>
+<div class="container py-4">
+  <h2 class="text-center fw-bold mb-4">Ajouter une suggestion</h2>
+
+  <form [formGroup]="suggestionForm" (ngSubmit)="onSubmit()">
+
+    <!-- Titre -->
+    <div class="mb-3">
+      <label for="title" class="form-label">Titre :</label>
+      <input type="text" id="title" class="form-control" formControlName="title" />
+      <div *ngIf="suggestionForm.get('title')?.invalid && suggestionForm.get('title')?.touched">
+        <small class="text-danger" *ngIf="suggestionForm.get('title')?.errors?.['required']">Le titre est obligatoire.</small>
+        <small class="text-danger" *ngIf="suggestionForm.get('title')?.errors?.['minlength']">Le titre doit contenir au minimum 5 caractères.</small>
+        <small class="text-danger" *ngIf="suggestionForm.get('title')?.errors?.['pattern']">Le titre doit commencer par une majuscule et ne contenir que des lettres.</small>
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description :</label>
+      <textarea id="description" class="form-control" rows="3" formControlName="description"></textarea>
+      <div *ngIf="suggestionForm.get('description')?.invalid && suggestionForm.get('description')?.touched">
+        <small class="text-danger" *ngIf="suggestionForm.get('description')?.errors?.['required']">La description est obligatoire.</small>
+        <small class="text-danger" *ngIf="suggestionForm.get('description')?.errors?.['minlength']">La description doit contenir au minimum 30 caractères.</small>
+      </div>
+    </div>
+
+    <!-- Catégorie -->
+    <div class="mb-3">
+      <label for="category" class="form-label">Catégorie :</label>
+      <select id="category" class="form-select" formControlName="category">
+        <option value="" disabled>-- Sélectionner une catégorie --</option>
+        <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+      </select>
+      <div *ngIf="suggestionForm.get('category')?.invalid && suggestionForm.get('category')?.touched">
+        <small class="text-danger">La catégorie est obligatoire.</small>
+      </div>
+    </div>
+
+    <!-- Date (readonly) -->
+    <div class="mb-3">
+      <label for="date" class="form-label">Date :</label>
+      <input type="text" id="date" class="form-control" formControlName="date" readonly />
+    </div>
+
+    <!-- Status (readonly) -->
+    <div class="mb-3">
+      <label for="status" class="form-label">Statut :</label>
+      <input type="text" id="status" class="form-control" formControlName="status" readonly />
+    </div>
+
+    <!-- Bouton Soumettre -->
+    <button type="submit" class="btn btn-primary" [disabled]="suggestionForm.invalid">Soumettre</button>
+
+  </form>
+</div>
