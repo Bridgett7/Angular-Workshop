@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SuggestionsService } from '../suggestions.service';
 
 @Component({
   selector: 'app-suggestion-form',
@@ -23,26 +24,35 @@ export class SuggestionFormComponent implements OnInit {
     'Autre'
   ];
 
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private suggestionsService: SuggestionsService
+  ) {}
 
   ngOnInit(): void {
     this.suggestionForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(5), Validators.pattern('^[A-Z][a-zA-Z ]*$')]],
       description: ['', [Validators.required, Validators.minLength(30)]],
       category: ['', Validators.required],
-      date: [{ value: new Date().toISOString().split('T')[0], disabled: false }],
-      status: [{ value: 'en attente', disabled: false }]
+      date: [new Date().toISOString().split('T')[0]],
+      status: ['en_attente']
     });
   }
 
   onSubmit(): void {
     if (this.suggestionForm.valid) {
+      const formValue = this.suggestionForm.value;
       const newSuggestion = {
-        ...this.suggestionForm.value,
-        id: Date.now(),
+        id: 0,
+        title: formValue.title,
+        description: formValue.description,
+        category: formValue.category,
+        date: new Date(formValue.date),
+        status: formValue.status,
         nbLikes: 0
       };
-      console.log('Nouvelle suggestion :', newSuggestion);
+      this.suggestionsService.addSuggestion(newSuggestion);
       this.router.navigate(['/suggestions']);
     }
   }
