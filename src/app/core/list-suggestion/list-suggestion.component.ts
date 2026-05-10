@@ -8,6 +8,7 @@ import { Suggestion } from '../../models/suggestion';
 })
 export class ListSuggestionComponent {
   favorites: Suggestion[] = [];
+  searchTerm: string = '';
 
   suggestions: Suggestion[] = [
     {
@@ -47,6 +48,17 @@ export class ListSuggestionComponent {
       nbLikes: 0
     },
   ];
+
+  get filteredSuggestions(): Suggestion[] {
+    if (!this.searchTerm) {
+      return this.suggestions;
+    }
+    const term = this.searchTerm.toLowerCase();
+    return this.suggestions.filter(s =>
+      s.title.toLowerCase().includes(term) ||
+      s.category.toLowerCase().includes(term)
+    );
+  }
 
   like(suggestion: Suggestion): void {
     suggestion.nbLikes++;
