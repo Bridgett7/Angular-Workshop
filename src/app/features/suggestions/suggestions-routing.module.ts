@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListSuggestionComponent } from './list-suggestion/list-suggestion.component';
 import { SuggestionDetailsComponent } from './suggestion-details/suggestion-details.component';
+import { SuggestionFormComponent } from './suggestion-form/suggestion-form.component';
 
 const routes: Routes = [
   { path: '', component: ListSuggestionComponent },
+  { path: 'form', component: SuggestionFormComponent },
   { path: ':id', component: SuggestionDetailsComponent }
 ];
 
