@@ -47,6 +47,11 @@
           ♡ {{ isFavorite(suggestion) ? 'Déjà en favoris' : 'Ajouter aux favoris' }}
         </button>
       </div>
+
+      <!-- Bouton Details -->
+      <div class="mt-2">
+        <a class="btn btn-outline-primary btn-sm" [routerLink]="['/suggestions', suggestion.id]">Details</a>
+      </div>
     </div>
   </div>
 </div>
