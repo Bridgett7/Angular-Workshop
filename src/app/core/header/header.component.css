@@ -11,3 +11,9 @@
 .nav-link-custom:hover {
   color: #ddd;
 }
+
+.nav-link-custom.active-link {
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+}

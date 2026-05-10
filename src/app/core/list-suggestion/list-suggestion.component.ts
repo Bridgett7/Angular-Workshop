@@ -7,7 +7,9 @@ import { Suggestion } from '../../models/suggestion';
   styleUrl: './list-suggestion.component.css'
 })
 export class ListSuggestionComponent {
-suggestions: Suggestion[] = [
+  favorites: Suggestion[] = [];
+
+  suggestions: Suggestion[] = [
     {
       id: 1,
       title: 'Organiser une journée team building',
@@ -45,4 +47,18 @@ suggestions: Suggestion[] = [
       nbLikes: 0
     },
   ];
+
+  like(suggestion: Suggestion): void {
+    suggestion.nbLikes++;
+  }
+
+  addToFavorites(suggestion: Suggestion): void {
+    if (!this.isFavorite(suggestion)) {
+      this.favorites.push(suggestion);
+    }
+  }
+
+  isFavorite(suggestion: Suggestion): boolean {
+    return this.favorites.some(f => f.id === suggestion.id);
+  }
 }
