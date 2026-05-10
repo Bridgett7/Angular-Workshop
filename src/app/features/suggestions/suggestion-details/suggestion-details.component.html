@@ -1,1 +1,13 @@
-<p>suggestion-details works!</p>
+<div class="container py-4" *ngIf="suggestion">
+  <div class="card">
+    <div class="card-body">
+      <h3 class="fw-bold">{{ suggestion.title }}</h3>
+      <p><span class="text-primary fw-semibold">{{ suggestion.category }}</span></p>
+      <p class="text-muted">{{ suggestion.date | date:'dd MMM yyyy' }}</p>
+      <p>{{ suggestion.description }}</p>
+      <p><strong>Statut :</strong> {{ suggestion.status }}</p>
+      <p><strong>Likes :</strong> {{ suggestion.nbLikes }}</p>
+    </div>
+  </div>
+  <a class="btn btn-secondary mt-3" routerLink="/suggestions">← Back to list</a>
+</div>
