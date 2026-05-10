@@ -1,0 +1,14 @@
+.badge-acceptee {
+  color: #155724;
+  background-color: #d4edda;
+}
+
+.badge-refusee {
+  color: #721c24;
+  background-color: #f8d7da;
+}
+
+.badge-en-attente {
+  color: #856404;
+  background-color: #fff3cd;
+}

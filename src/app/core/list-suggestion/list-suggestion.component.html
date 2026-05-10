@@ -1,1 +1,28 @@
-<p>list-suggestion works!</p>
+<div class="container py-4">
+  <h2 class="text-center fw-bold mb-4">Liste des suggestions</h2>
+
+  <!-- Liste des suggestions -->
+  <div class="card mb-3" *ngFor="let suggestion of suggestions">
+    <div class="card-body">
+      <h5 class="fw-bold mb-1">{{ suggestion.title }}</h5>
+      <p class="mb-2">
+        <span class="text-primary fw-semibold">{{ suggestion.category }}</span>
+        <span class="text-muted ms-2">{{ suggestion.date | date:'dd MMM yyyy' }}</span>
+      </p>
+      <p class="text-muted mb-2">{{ suggestion.description }}</p>
+
+      <!-- Badge statut -->
+      <span
+        class="badge"
+        [ngClass]="{
+          'badge-acceptee': suggestion.status === 'acceptee',
+          'badge-refusee': suggestion.status === 'refusee',
+          'badge-en-attente': suggestion.status === 'en_attente'
+        }"
+      >
+        {{ suggestion.status === 'acceptee' ? 'ACCEPTÉE' :
+           suggestion.status === 'refusee' ? 'REFUSÉE' : 'EN ATTENTE' }}
+      </span>
+    </div>
+  </div>
+</div>
